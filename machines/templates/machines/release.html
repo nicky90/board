@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Release Form{% endblock %}
+
+{% block content %}
+<form class="form-horizontal" role="form" action="" method="post">
+{% csrf_token %}
+  <div class="form-group">
+    <div class="row">
+      <input name="hostname" class="form-control" id="hostname" value="{{ machine.hostname }}" />
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="row">
+      <input name="arch" class="form-control" id="arch" value="{{ machine.arch }}" />
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="row">
+      <input name="os" class="form-control" id="os" value="{{ machine.os }}" />
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="row">
+      <input name="os" class="form-control" id="os" value="{{ machine.os }}" />
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="row">
+      <select name="receiver" class="form-control" id="receiver">
+        {% for p in user_list %}
+        <option>{{ p.username }}
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="row">
+      <button type="submit" class="btn btn-primary">Commit</button>
+    </div>
+  </div>
+</form>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block headline %}HCTS Team Machine Board{% endblock %}
+
+{% block header %}
+<ul class="nav nav-pills pull-right">
+  {% if user %}
+{% comment %}
+  <li><a href="{% url 'machines:profile' user %}"><small>{{ user.username }}</small></a></li>
+  <li><a href="{% url 'machines:profile' user %}"><small>{{ user.username }}</small></a></li>
+{% endcomment %}
+
+  <li><a href="{% url 'machines:logout' %}"><small>LogOut</small></a></li>
+  {% else %}
+  <li><a href="/machines/accounts/login/"><small>SignIn</small></a></li>
+  <li><a href="/machines/accounts/register/"><small>SignUp</small></a></li>
+  {% endif %}
+</ul>
+{% endblock %}
+
+{% block content %}
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Machine</th>
+      <th>Arch</th>
+      <th>OS</th>
+      <th>Location</th>
+      <th>Status</th>
+      <th>User</th>
+      <th>Note</th>
+      {% if user %}
+      <th>Opt</th>
+      {% endif %}
+    </tr>
+  </thead>
+  <tbody>
+    {% for m in machine_list %}
+    <tr>
+      <td><a href="{{ m.ref_url }}">{{ m.hostname }}</a></td>
+      <td>{{ m.arch }}</td>
+      <td>{{ m.os }}</td>
+      <td>{{ m.location }}</td>
+      <td>{{ m.status }}</td>
+      <td>{{ m.user }}</td>
+      <td>{{ m.note }}</td>
+      {% if user %}
+        {% ifequal m.user user %}
+        <td><a href="{% url 'machines:release' m %}">Release</a></td>
+        {% else %}
+        <td><a href="{% url 'machines:applyfor' m %}">ApplyFor</a></td>
+        {% endifequal %}
+      {% endif %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

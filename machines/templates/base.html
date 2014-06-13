@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'machines/bootstrap.min.css' %}">
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        {% block header %}{% endblock %}
+        <h3 class="text-muted">{% block headline %}{% endblock %}</h3>
+      </div>
+      <hr />
+      <br />
+<!--
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Machine</th>
+            <th>Arch</th>
+            <th>OS</th>
+            <th>Location</th>
+            <th>Status</th>
+            <th>Owner</th>
+            <th>Note</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for machine in machine_list %}
+          <tr>
+            <td><a href="{{ machine.detail }}">{{ machine.hostname }}</a></td>
+            <td>{{ machine.arch }}</td>
+            <td>{{ machine.os }}</td>
+            <td>{{ machine.location }}</td>
+            <td>{{ machine.status }}</td>
+            <td>{{ machine.owner }}</td>
+            <td>{{ machine.note }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+//-->
+      {% block content %}{% endblock %}     
+      <div class="footer">
+        <p>&copy; HCTS Team 2014 <span>Contact us: </span><span><a href="mailto:nick_chiu@163.com">Email</a></span></p>
+      </div>
+    </div><!-- container -->
+  </body>
+</html>
